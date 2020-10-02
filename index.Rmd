@@ -1,0 +1,76 @@
+---
+title       : Week 4 assigment
+subtitle    : 
+author      : 
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Week 4
+
+Reproducible Pitch Presentation
+Poisson prediction model and analysing unknown Markets for deeper analysis.
+
+ ○ Dataset:: package(ISLR) Smarket
+    ○Variables = Lag (Percentage return for (n) previous days. In this data goes up to 5
+    ○Volume = Volume of shares traded (in billions)
+    ○Direction = Indicates if closing volume was that given day
+    
+Hypothesis:
+Portfolio to benchmark with the unknown Index.
+
+"What the years between 2001 - 2005
+can present with it's volume and previous Percentage return?"
+ ○ Would be wise to predict what are the odds to high volatility days?
+ ○ Looking at the odds the risk can be hedged and profitable?
+ 
+ 
+---
+
+
+
+
+##Statistical Inference:
+Poisson model choosed from other prediction models for the direct calculation of what to expect for selected days. Allowing us to have a glimpse of what expect from the market with certain environments. Althought poisson be a discrete prediction. With more detailed data a more precise prediction can be conducted.
+
+
+---
+
+##Analysis
+Probability of holding stock position with %return of previous day higher than 2%
+```{r, echo = TRUE, results = TRUE}
+library(ISLR)
+z <- ppois(Smarket$Volume > 500, Smarket$Lag1 >2, lower.tail = FALSE)
+z <- ppois(Smarket$Volume > 1000, Smarket$Lag1 >2, lower.tail = FALSE)
+z <- ppois(Smarket$Volume < 0.2, Smarket$Lag1 > 2, lower.tail = FALSE)
+z <- ppois(Smarket$Volume < 0.7, Smarket$Lag1 > 2, lower.tail = FALSE)
+```
+Only with setting up the size dealt with the next day we can predict what outcome can be expected.
+Volume lower than 0.7 shown smaller probability with having a previous day with high volatility.
+
+---
+linear Model prediction
+```{R, echo=FALSE, results=TRUE}
+library(ISLR)
+    model1 <- lm(Volume ~ Lag1 , data = Smarket)
+    model2 <- lm(Volume ~ Today  - Lag2, data = Smarket)
+summary(model1)
+```
+
+---
+
+Shiny App + Prediction Models
+
+The layout and interactive way this shiny app presents it's to offer a faster method to analyze possible hypothesis to be studied with deeper detail
+```{r}
+
+```
+
+
+
+

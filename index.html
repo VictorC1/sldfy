@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Week 4 assigment</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Week 4 assigment">
+  <meta name="author" content="">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  
+  <hgroup class="auto-fadein">
+    <h1>Week 4 assigment</h1>
+    <h2></h2>
+    <p><br/></p>
+  </hgroup>
+  
+  <article></article>  
+  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  
+  <hgroup>
+    <h2>Week 4</h2>
+  </hgroup>
+  
+  <article data-timings="">
+    <p>Reproducible Pitch Presentation
+Poisson prediction model and analysing unknown Markets for deeper analysis.</p>
+
+<p>○ Dataset:: package(ISLR) Smarket
+    ○Variables = Lag (Percentage return for (n) previous days. In this data goes up to 5
+    ○Volume = Volume of shares traded (in billions)
+    ○Direction = Indicates if closing volume was that given day</p>
+
+<p>Hypothesis:
+Portfolio to benchmark with the unknown Index.</p>
+
+<p>&quot;What the years between 2001 - 2005
+can present with it&#39;s volume and previous Percentage return?&quot;
+ ○ Would be wise to predict what are the odds to high volatility days?
+ ○ Looking at the odds the risk can be hedged and profitable?</p>
+
+<hr>
+
+<p>##Statistical Inference:
+Poisson model choosed from other prediction models for the direct calculation of what to expect for selected days. Allowing us to have a glimpse of what expect from the market with certain environments. Althought poisson be a discrete prediction. With more detailed data a more precise prediction can be conducted.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  
+  <article data-timings="">
+    <p>##Analysis
+Probability of holding stock position with %return of previous day higher than 2%</p>
+
+<pre><code class="r">library(ISLR)
+</code></pre>
+
+<pre><code>## Warning: package &#39;ISLR&#39; was built under R version 3.5.3
+</code></pre>
+
+<pre><code class="r">z &lt;- ppois(Smarket$Volume &gt; 500, Smarket$Lag1 &gt;2, lower.tail = FALSE)
+z &lt;- ppois(Smarket$Volume &gt; 1000, Smarket$Lag1 &gt;2, lower.tail = FALSE)
+z &lt;- ppois(Smarket$Volume &lt; 0.2, Smarket$Lag1 &gt; 2, lower.tail = FALSE)
+z &lt;- ppois(Smarket$Volume &lt; 0.7, Smarket$Lag1 &gt; 2, lower.tail = FALSE)
+</code></pre>
+
+<p>Only with setting up the size dealt with the next day we can predict what outcome can be expected.
+Volume lower than 0.7 shown smaller probability with having a previous day with high volatility.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  
+  <article data-timings="">
+    <p>linear Model prediction</p>
+
+<pre><code>## 
+## Call:
+## lm(formula = Volume ~ Lag1, data = Smarket)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.12438 -0.21477 -0.05378  0.15966  1.66346 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  1.47826    0.01019 145.097   &lt;2e-16 ***
+## Lag1         0.01297    0.00897   1.446    0.148    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.3602 on 1248 degrees of freedom
+## Multiple R-squared:  0.001674,   Adjusted R-squared:  0.0008737 
+## F-statistic: 2.092 on 1 and 1248 DF,  p-value: 0.1483
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  
+  <article data-timings="">
+    <p>Shiny App + Prediction Models</p>
+
+<p>The layout and interactive way this shiny app presents it&#39;s to offer a faster method to analyze possible hypothesis to be studied with deeper detail</p>
+
+  </article>
+  <!-- Presenter Notes -->
+  
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Week 4'>
+         1
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='NA'>
+         2
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='NA'>
+         3
+      </a>
+    </li>
+    
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='NA'>
+         4
+      </a>
+    </li>
+    
+    </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
